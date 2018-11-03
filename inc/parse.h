@@ -45,5 +45,6 @@
 * @return pointer to a string of char
 */
 char *parse(char *str, const char *delimiters, uint32_t argnumber);
+void nextToken(char *strin, char *copy, uint32_t ctr);
 
 #endif

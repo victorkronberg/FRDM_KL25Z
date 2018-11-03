@@ -21,27 +21,33 @@
 */
 
 #include <parse.h>
+	char *space = (char *)' ';
+	char *ret = (char *)"/r";
+	char *newline = (char *)"/n";
 
 char *parse(char *str, const char *delimiters, uint32_t argnumber)
 {
 	
-	char *returnStr;
+	char *returnStr = NULL;
 	char inputcopy[MAX_CMD_STRING_LENGTH];
-	char *token[MAX_CMD_STRING_LENGTH];
+	char *ptr = inputcopy;
 	uint32_t i;
 	
 	if(argnumber >= 0 && str != NULL && delimiters != NULL)
 	{
-		for(uint32_t ctr = 0; ctr < MAX_CMD_STRING_LENGTH; ctr++){
-			inputcopy[ctr]=str[ctr];
-		}
-		token[0] = strtok(inputcopy,delimiters);
-		returnStr = token[0];
-		
-		for(i=0; i < argnumber; i++) //loop through tokens until argument requested is reached or end of tokens
+		uint32_t ctr = 0;
+
+
+		for(i=0; i <= argnumber; i++) //loop through tokens until argument requested is reached or end of tokens
 		{
-			token[i] = strtok(NULL, delimiters);  
-			returnStr = token[i];
+
+			nextToken(str,ptr,ctr);
+			returnStr = ptr;
+
+			if(strcmp((char *)str[ctr],ret)==0||strcmp((char *)str[ctr],newline)==0){
+				return returnStr;
+				//End of inputs
+			}
 		}
 			
 		return returnStr;
@@ -54,4 +60,25 @@ char *parse(char *str, const char *delimiters, uint32_t argnumber)
 	
 	return returnStr;
 	
+}
+
+void nextToken(char *strin, char *copy, uint32_t ctr){
+
+	uint32_t j = 0;
+	for(uint32_t i = ctr; i < MAX_CMD_STRING_LENGTH; i++)
+	{
+		*(copy+j)=strin[ctr];
+
+			j++;
+			while(1){
+
+					}
+			if(strcmp((char *)strin[ctr],space)==0\
+								||strcmp((char *)strin[ctr],ret)==0\
+								||strcmp((char *)strin[ctr],newline))
+						{
+							return;
+						}
+	}
+
 }
