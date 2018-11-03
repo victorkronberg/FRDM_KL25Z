@@ -75,11 +75,13 @@ printf("\r\nWelcome.\r\nIf you would like to invoke the help function to see a l
 	    	receiveBuffer = GETCHAR();
 	    	PUTCHAR(receiveBuffer);
 	    	inputarr[ctr] = (char) receiveBuffer;
-	    	if(receiveBuffer=='\n')
+	    	if(receiveBuffer=='\r')
 	    	{
 	    		break;
 	    	}
 	    }
+
+	    input = inputarr;
 
 		if (input != NULL)
 		{
