@@ -68,13 +68,9 @@ printf("\r\nWelcome.\r\nIf you would like to invoke the help function to see a l
 	{	
 		printf(">>");
 		char valid_cmd_flag = 0; 
-		input = (char*)malloc(MAX_CMD_STRING_LENGTH * sizeof(char));
 		char inp[100];
 		char *command = (char*)malloc(MAX_CMD_STRING_LENGTH * sizeof(char));
-		char arg1[10];
-		char arg2[10];
-		char arg3[10];
-		scanf("%s %s %s %s",inp,arg1,arg2,arg3);
+		scanf("%s",inp);
 
 		if (inp != NULL)
 		{

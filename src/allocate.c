@@ -28,17 +28,20 @@ uint32_t mem_block_size = 0;
 
 void AllocateInvoker(void)
 {
-	if(CheckInput(ARG1,NUMBERS,FALSE))
-	{
-		char *word_str=parse(input,delimiters,ARG1);
-		uint32_t words = atoi(word_str);
+
+	char arg1[10];
+	scanf("%s",arg1);
+	//if(CheckInput(ARG1,NUMBERS,FALSE))
+	//{
+		//char *word_str=parse(input,delimiters,ARG1);
+		uint32_t words = atoi(arg1);
 		ptr_to_mem = AllocateCommand(words);
 		
-	}
-	else
-	{
-		printf("Invalid arguments to allocate command. No memory will be allocated.\n");
-	}
+	//}
+	//else
+	//{
+	//	printf("Invalid arguments to allocate command. No memory will be allocated.\n");
+	//}
 
 }
 
