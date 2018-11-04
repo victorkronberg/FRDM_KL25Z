@@ -78,7 +78,7 @@ printf("\r\nWelcome.\r\nIf you would like to invoke the help function to see a l
 
 		if (inp != NULL)
 		{
-			command = parse(&inp,delimiters,CMND);
+			command = inp;
 			for (uint32_t i = 0; i < (sizeof(commandTable)/sizeof(commandTable[0])); i++)
 			{
 				if (command !=NULL && strcmp(command,commandTable[i].cmdName) == 0)
