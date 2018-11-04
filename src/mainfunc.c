@@ -26,7 +26,7 @@
 
 typedef void (*functionPointerType)(void);
 char *input;
-const char *delimiters = " \r\n";
+const char *delimiters = "\0";
 
 
 
@@ -69,21 +69,16 @@ printf("\r\nWelcome.\r\nIf you would like to invoke the help function to see a l
 		printf(">>");
 		char valid_cmd_flag = 0; 
 		input = (char*)malloc(MAX_CMD_STRING_LENGTH * sizeof(char));
-		char inputarr[MAX_CMD_STRING_LENGTH];
-		uint8_t receiveBuffer;
-	    for(uint32_t ctr = 0; ctr < MAX_CMD_STRING_LENGTH; ctr++){
-	    	receiveBuffer = GETCHAR();
-	    	PUTCHAR(receiveBuffer);
-	    	inputarr[ctr] = (char) receiveBuffer;
-	    	if(receiveBuffer=='\n')
-	    	{
-	    		break;
-	    	}
-	    }
+		char inp[100];
+		char *command = (char*)malloc(MAX_CMD_STRING_LENGTH * sizeof(char));
+		char arg1[10];
+		char arg2[10];
+		char arg3[10];
+		scanf("%s %s %s %s",inp,arg1,arg2,arg3);
 
-		if (input != NULL)
+		if (inp != NULL)
 		{
-			char *command = parse(input,delimiters,CMND);
+			command = parse(&inp,delimiters,CMND);
 			for (uint32_t i = 0; i < (sizeof(commandTable)/sizeof(commandTable[0])); i++)
 			{
 				if (command !=NULL && strcmp(command,commandTable[i].cmdName) == 0)
@@ -107,6 +102,7 @@ printf("\r\nWelcome.\r\nIf you would like to invoke the help function to see a l
 			printf("Error- EOF was reached before any characters were input\n");
 			}
 		free(input);
+		free(command);
 	}
 	printf("That was the end of a command");
 }

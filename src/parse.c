@@ -6,7 +6,7 @@
 * of Colorado are not liable for any misuse of this material.
 *
 *******************************************************************************************
-/**
+**
 * @file parse.c
 * @brief This file implements the parse function
 *
@@ -24,34 +24,34 @@
 
 char *parse(char *str, const char *delimiters, uint32_t argnumber)
 {
-	
+
 	char *returnStr;
 	char inputcopy[MAX_CMD_STRING_LENGTH];
+	char *to;
 	char *token[MAX_CMD_STRING_LENGTH];
 	uint32_t i;
-	
-	if(argnumber >= 0 && str != NULL && delimiters != NULL)
+
+	if(argnumber >= 0 && str != NULL)
 	{
-		for(uint32_t ctr = 0; ctr < MAX_CMD_STRING_LENGTH; ctr++){
-			inputcopy[ctr]=str[ctr];
-		}
-		token[0] = strtok(inputcopy,delimiters);
+		strcpy(inputcopy,str); //copy str to avoid manipulating input string
+		//to = inputcopy;
+		//token[0] = strtok(inputcopy,delimiters);
 		returnStr = token[0];
-		
+/*
 		for(i=0; i < argnumber; i++) //loop through tokens until argument requested is reached or end of tokens
 		{
-			token[i] = strtok(NULL, delimiters);  
+			token[i] = strtok(NULL, delimiters);
 			returnStr = token[i];
 		}
-			
+*/
 		return returnStr;
 
 	} 
 	else 
 	{
-		returnStr = 0; //return a null pointer if argnumber is not > 0 or NULL string was passed in
+		returnStr = NULL; //return a null pointer if argnumber is not > 0 or NULL string was passed in
 	}
-	
+
 	return returnStr;
 	
 }
