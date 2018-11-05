@@ -55,7 +55,14 @@ uint32_t *AllocateCommand(uint32_t number_words)
 	{
 		ptr_to_mem = (uint32_t *)malloc((number_words)*(sizeof(uint32_t)));
 		mem_block_size = number_words;
+		if(ptr_to_mem == 0)
+		{
+			printf("Not enough memory, no memory allocated.\r\n");
+		}
+		else
+		{
 		printf("Allocated %u words.\r\n", mem_block_size);
+		}
 	} 
 	else 
 	{
