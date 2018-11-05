@@ -29,19 +29,23 @@ uint32_t mem_block_size = 0;
 void AllocateInvoker(void)
 {
 
-	char arg1[10];
+	char arg1[MAX_ARG_LENGTH];
 	scanf("%s",arg1);
-	//if(CheckInput(ARG1,NUMBERS,FALSE))
-	//{
+	printf("\r\n%s",arg1);
+	char *argptr = arg1;
+	if(CheckInput(argptr,NUMBERS,FALSE))
+	{
 		//char *word_str=parse(input,delimiters,ARG1);
 		uint32_t words = atoi(arg1);
 		ptr_to_mem = AllocateCommand(words);
 		
-	//}
-	//else
-	//{
-	//	printf("Invalid arguments to allocate command. No memory will be allocated.\n");
-	//}
+	}
+	else
+	{
+		printf("Invalid arguments to allocate command. No memory will be allocated.\n");
+	}
+
+	return;
 
 }
 
@@ -51,16 +55,16 @@ uint32_t *AllocateCommand(uint32_t number_words)
 	{
 		ptr_to_mem = (uint32_t *)malloc((number_words)*(sizeof(uint32_t)));
 		mem_block_size = number_words;
-		printf("Allocated %u words.\n", mem_block_size);
+		printf("Allocated %u words.\r\n", mem_block_size);
 	} 
 	else 
 	{
-		printf("No new memory allocated, %u words are already allocated.\n", mem_block_size);
+		printf("No new memory allocated, %u words are already allocated.\r\n", mem_block_size);
 	}
 
 	if(ptr_to_mem != 0)
 	{
-		printf("Your allocated memory address range is [%p - %p].\n\n", ptr_to_mem, ptr_to_mem + mem_block_size-1);
+		printf("Your allocated memory address range is [%p - %p].\r\n\r\n", ptr_to_mem, ptr_to_mem + mem_block_size-1);
 	}
 
 	return ptr_to_mem;

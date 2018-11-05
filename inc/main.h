@@ -24,6 +24,7 @@
 #define __MAIN_H__
 
 #define MAX_CMD_STRING_LENGTH (100)
+#define MAX_ARG_LENGTH (20)
 #define CMND (0)
 #define ARG1 (1)
 #define ARG2 (2)

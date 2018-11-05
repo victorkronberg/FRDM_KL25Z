@@ -25,9 +25,8 @@
 #include "fsl_debug_console.h"
 
 typedef void (*functionPointerType)(void);
-char *input;
 const char *delimiters = "\0";
-
+char *input;
 
 
 void mainfunc(void)
@@ -63,17 +62,19 @@ printf("\r\nWelcome.\r\nIf you would like to invoke the help function to see a l
 	 //PRINTF("\r\nNEW CHAR!\r\n\r\n");
      // First, get character
 
+	char *command = (char*)malloc(MAX_CMD_STRING_LENGTH * sizeof(char));
 
 	while(1)
 	{	
-		printf(">>");
+		printf("\r\n>>");
 		char valid_cmd_flag = 0; 
 		char inp[100];
-		char *command = (char*)malloc(MAX_CMD_STRING_LENGTH * sizeof(char));
+
 		scanf("%s",inp);
 
 		if (inp != NULL)
 		{
+			printf("%s\r\n",inp);
 			command = inp;
 			for (uint32_t i = 0; i < (sizeof(commandTable)/sizeof(commandTable[0])); i++)
 			{
@@ -86,19 +87,20 @@ printf("\r\nWelcome.\r\nIf you would like to invoke the help function to see a l
 				if (command !=NULL && strcmp(command,"exit") == 0)
 				{
 					printf("Exiting program.\r\n");
+					free(command);
 					exit(EXIT_SUCCESS);
+					return;
 				}
 			}
 			if (valid_cmd_flag == 0)
 			{
-				printf("Please enter a valid command.\n");
+				printf("Please enter a valid command.\r\n");
 			}
 		} else 
 			{
-			printf("Error- EOF was reached before any characters were input\n");
+			printf("Error- EOF was reached before any characters were input\r\n");
 			}
-		free(input);
-		free(command);
+		command = NULL;
 	}
 	printf("That was the end of a command");
 }

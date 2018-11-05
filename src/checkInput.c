@@ -23,12 +23,11 @@
 #include <checkInput.h>
 #include <main.h>
 
-uint32_t CheckInput(uint32_t argument_number,char *argument_type,uint32_t additional_args)
+uint32_t CheckInput(char *input_str,char *argument_type,uint32_t additional_args)
 {
 	
-	char *input_str=parse(input,delimiters,argument_number);  //Parse requested argument
 	
-	if((input_str!=NULL && additional_args==TRUE) || (input_str!=NULL && additional_args == FALSE && parse(input,delimiters,argument_number+1)==NULL)) //Check for appropriate number of arguments
+	if(input_str!=NULL) //Check for appropriate number of arguments
 	{
 		if(strlen(input_str) == strspn(input_str,argument_type)) //Make sure argument does not contain illegal characters for argument_type
 		{

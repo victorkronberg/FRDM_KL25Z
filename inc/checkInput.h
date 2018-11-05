@@ -39,6 +39,6 @@
 * @param pointer to char string of input
 * @return boolean logic (true or false)
 */
-uint32_t CheckInput(uint32_t argument_number,char *argument_type,uint32_t additional_args);
+uint32_t CheckInput(char *input_str,char *argument_type,uint32_t additional_args);
 
 #endif

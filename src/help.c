@@ -52,40 +52,40 @@ void help(void)
 	
 	display.func = "display - Displays contents of memory in hexadecimal format";
 	display.usage = "  usage: display [address] [words] OR display 'X' [word position (starting from 0)] [words]";
-	display.details = "    address: hex value of displayed starting address\n    word position: word position\n    words [optional]: number of 32-bit words to display\n    X: flag tells program to use word position instead of address";
+	display.details = "    address: hex value of displayed starting address\r\n    word position: word position\r\n    words [optional]: number of 32-bit words to display\r\n    X: flag tells program to use word position instead of address";
 	
 	helpMsg write;
 
 	write.func = "modify - Writes a specified value to a specified address or word position";
 	write.usage = "  usage: modify <address> <value> OR modify 'X' <word position> <value>";
-	write.details = "    address: address in hex value\n    word position: word position\n    value: value to write to memory\n    X: flag tells program to use word position instead of address";
+	write.details = "    address: address in hex value\r\n    word position: word position\r\n    value: value to write to memory\r\n    X: flag tells program to use word position instead of address";
 	
 	helpMsg invert;
 	
 	invert.func = "invert - Inverts bits starting from a specified memory address and going on for a number of words";
 	invert.usage = "  usage: invert <address> <words> OR invert 'X' <word position> <words>";
-	invert.details = "    address: address in hex value\n    word position: word position\n    words: number of 32-bit words to invert\n    X: flag tells program to use word position instead of address";
+	invert.details = "    address: address in hex value\r\n    word position: word position\r\n    words: number of 32-bit words to invert\r\n    X: flag tells program to use word position instead of address";
 
 	helpMsg writePattern;
 	
 	writePattern.func = "write - Writes pseudo-random pattern to specified address";
 	writePattern.usage = "  usage: write <address> <words> <seed> OR write 'X' <word position> <number of words> <seed>";
-	writePattern.details = "    address: hex value of address\n    word position: word position\n    words: number of words to write\n    seed: seed value for pseudo-random number generator\n    X: flag tells program to use word position instead of address";
+	writePattern.details = "    address: hex value of address\r\n    word position: word position\r\n    words: number of words to write\r\n    seed: seed value for pseudo-random number generator\r\n    X: flag tells program to use word position instead of address";
 
 	helpMsg verifyPattern;
 	
 	verifyPattern.func = "verify - Verifies pseudo-random pattern in specified area of memory";
 	verifyPattern.usage = "  usage: verify <address> <words> <seed> OR verify 'X' <word position> <words> <seed>";
-	verifyPattern.details = "    address: hex value of address\n    word position: word position\n    words: number of words to verify\n    seed: seed value for pseudo-random number generator\n    X: flag tells program to use word position instead of address";
+	verifyPattern.details = "    address: hex value of address\r\n    word position: word position\r\n    words: number of words to verify\r\n    seed: seed value for pseudo-random number generator\r\n    X: flag tells program to use word position instead of address";
 	
-	printf("\nhelp file contents:\n\n");
-	printf("%s\n%s\n%s\n\n",allocate.func,allocate.usage,allocate.details);
-	printf("%s\n%s\n%s\n\n",free.func,free.usage,free.details);
-	printf("%s\n%s\n%s\n\n",display.func,display.usage,display.details);
-	printf("%s\n%s\n%s\n\n",write.func,write.usage,write.details);
-	printf("%s\n%s\n%s\n\n",invert.func,invert.usage,invert.details);
-	printf("%s\n%s\n%s\n\n",writePattern.func,writePattern.usage,writePattern.details);
-	printf("%s\n%s\n%s\n\n",verifyPattern.func,verifyPattern.usage,verifyPattern.details);
+	printf("\r\nhelp file contents:\r\n\r\n");
+	printf("%s\r\n%s\r\n%s\r\n\r\n",allocate.func,allocate.usage,allocate.details);
+	printf("%s\r\n%s\r\n%s\r\n\r\n",free.func,free.usage,free.details);
+	printf("%s\r\n%s\r\n%s\r\n\r\n",display.func,display.usage,display.details);
+	printf("%s\r\n%s\r\n%s\r\n\r\n",write.func,write.usage,write.details);
+	printf("%s\r\n%s\r\n%s\r\n\r\n",invert.func,invert.usage,invert.details);
+	printf("%s\r\n%s\r\n%s\r\n\r\n",writePattern.func,writePattern.usage,writePattern.details);
+	printf("%s\r\n%s\r\n%s\r\n\r\n",verifyPattern.func,verifyPattern.usage,verifyPattern.details);
 	
 }
 
