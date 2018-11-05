@@ -62,7 +62,7 @@ printf("\r\nWelcome.\r\nIf you would like to invoke the help function to see a l
 	 //PRINTF("\r\nNEW CHAR!\r\n\r\n");
      // First, get character
 
-	char *command = (char*)malloc(MAX_CMD_STRING_LENGTH * sizeof(char));
+	char *command = (char*)malloc(MAX_ARG_LENGTH * sizeof(char));
 
 	while(1)
 	{	
