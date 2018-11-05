@@ -42,7 +42,7 @@ void WriteInvoker (void)
 		printf("\r\n%s ",arg1);
 		char *arg1ptr = arg1;
 
-		//Case 1: Sepcial flag "X" has been raised, use pointer to mem block as starting point for command
+		//Case 1: Sepcial flag "X" has been raised, use pointer to mem block as starting point for write
 		if(CheckInput(arg1ptr,SPECFLAG,FALSE))
 		{
 			//arg2 = offset value
@@ -72,6 +72,8 @@ void WriteInvoker (void)
 				WriteCommand(starting_address,num_words,seed);
 			}
 		}
+
+		//Case 2: specify the exact memory location to begin write command
 		else if(CheckInput(arg1ptr,HEXADECIMAL,FALSE))
 		{
 			//arg2 = number of words to write
