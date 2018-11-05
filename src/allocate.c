@@ -31,7 +31,7 @@ void AllocateInvoker(void)
 
 	char arg1[MAX_ARG_LENGTH];
 	scanf("%s",arg1);
-	printf("\r\n%s",arg1);
+	printf("\r\n%s\r\n",arg1);
 	char *argptr = arg1;
 	if(CheckInput(argptr,NUMBERS,FALSE))
 	{
@@ -42,7 +42,7 @@ void AllocateInvoker(void)
 	}
 	else
 	{
-		printf("Invalid arguments to allocate command. No memory will be allocated.\n");
+		printf("Invalid arguments to allocate command. No memory will be allocated.\r\n");
 	}
 
 	return;
