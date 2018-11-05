@@ -25,41 +25,82 @@
 
 void InvertInvoker(void)
 {
+	char arg1[MAX_ARG_LENGTH];
+	char arg2[MAX_ARG_LENGTH];
+	char arg3[MAX_ARG_LENGTH];
 	if(ptr_to_mem != NULL)
 	{
-		//Case 1: User provided starting address and number of words for invert command
-		if(CheckInput(ARG1,HEXADECIMAL,TRUE) && CheckInput(ARG2,NUMBERS,FALSE))
+
+		scanf("%s",arg1);
+		printf("\r\n%s ",arg1);
+		char *arg1ptr = arg1;
+
+		//Case 1: Sepcial flag "X" has been raised, use pointer to mem block as starting point for command
+		if(CheckInput(arg1ptr,SPECFLAG,FALSE))
 		{
-			char *addr_input=parse(input,delimiters,ARG1);
-			char *value_str=parse(input,delimiters,ARG2);
-			char **endptr = NULL;
-			uint32_t address_int;
-			uint32_t num_words;
-			
-			address_int = (uint32_t)strtol(addr_input,endptr,16);
-			num_words = (uint32_t)atoi(value_str);
-			
-			InvertCommand(address_int,num_words);
+			//arg1 = special flag
+			//arg2 = offset from mem block pointer
+			scanf("%s",arg2);
+			printf(" %s ",arg2);
+			//arg3 = number of words to invert
+			scanf("%s",arg3);
+			printf("%s\r\n",arg3);
+			char *arg2ptr = arg2;
+			char *arg3ptr = arg3;
+			if(CheckInput(arg2ptr,NUMBERS,TRUE) && CheckInput(arg3ptr,NUMBERS,FALSE))
+			{
+				uint32_t offset;
+				uint32_t num_words;
+
+				offset = (uint32_t)atoi(arg2);
+				num_words = (uint32_t)atoi(arg3);
+
+
+				uint32_t starting_address = (uint32_t)((uintptr_t)(ptr_to_mem+offset));
+
+				InvertCommand(starting_address,num_words);
+			}
+			else
+			{
+				printf("Invalid arguments for invert command. Please try again.\r\n");
+				return;
+			}
+
 		}
-		//Case 2: Special flag raised - user specifies offset from memory-pointer and number of words to invert
-		else if(CheckInput(ARG1,SPECFLAG,TRUE) && CheckInput(ARG2,NUMBERS,TRUE) && CheckInput(ARG3,NUMBERS,FALSE))
+		else if(CheckInput(arg1ptr,HEXADECIMAL,TRUE))
 		{
-			char *offset_str=parse(input,delimiters,ARG2);
-			char *value_str=parse(input,delimiters,ARG3);
-			uint32_t offset = (uint32_t)atoi(offset_str);
-			uint32_t num_words = (uint32_t)atoi(value_str);
-			
-			uint32_t address = (uint32_t)((uintptr_t)(ptr_to_mem+offset));
-			InvertCommand(address,num_words);
+			//Case 2: No special flag raised, input full address value
+			//arg1 = starting address value
+			//arg2 = number of workds to invert
+			scanf("%s",arg2);
+			printf(" %s\r\n",arg2);
+			char *arg2ptr = arg2;
+			if(CheckInput(arg2ptr,NUMBERS,FALSE))
+			{
+				char **endptr = NULL;
+				uint32_t address_int;
+				uint32_t num_words;
+
+				address_int = (uint32_t)strtol(arg1,endptr,16);
+				num_words = (uint32_t)atoi(arg2);
+
+				InvertCommand(address_int,num_words);
+
+			}
+			else
+			{
+				printf("Invalid arguments for invert command. Please try again.\r\n");
+				return;
+			}
 		}
 		else
 		{
-			printf("Invalid arguments to invert command. Nothing will be inverted.\n");
+			printf("Invalid arguments for invert command. Please try again.\r\n");
 		}
-	} 
-	else 
+	}
+	else
 	{
-		printf("You have no allocated memory to invert.\n");
+		printf("You have no allocated memory to invert.\r\n");
 	}
 	
 }
