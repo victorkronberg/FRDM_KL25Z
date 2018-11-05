@@ -89,66 +89,10 @@ void DisplayInvoker(void)
 				return;
 			}
 		}
-
-
-		/*
-		//Case 1: Specified address and number of words to display starting @ that address
-		if(CheckInput(ARG1,HEXADECIMAL,TRUE) && CheckInput(ARG2,NUMBERS,FALSE)) 
-		{
-			char *addr_input=parse(input,delimiters,ARG1);
-			char *word_str=parse(input,delimiters,ARG2);
-			char **endptr = NULL;
-			uint32_t address_int;
-			uint32_t num_words;
-			
-			address_int = (uint32_t)strtol(addr_input,endptr,16);
-			num_words = (uint32_t)atoi(word_str);
-			
-			DisplayCommand(address_int,num_words);
-		}
-		//Case 2: Only address was entered - display 1 word at that address
-		else if(CheckInput(ARG1,HEXADECIMAL,FALSE))
-		{
-			char *addr_input=parse(input,delimiters,ARG1);
-			char **endptr = NULL;
-			uint32_t address_int;
-			uint32_t num_words = 1;
-			
-			address_int = (uint32_t)strtol(addr_input,endptr,16);
-			num_words = 1;
-			
-			DisplayCommand(address_int,num_words);
-			
-		}
-		//Case 3: Special flag raised - use address pointer to allocated memory
-		else if(CheckInput(ARG1,SPECFLAG,TRUE) || CheckInput(ARG1,SPECFLAG,FALSE))
-		{
-			uint32_t num_words = 0;
-			uint32_t word_int = 0;
-			
-			//Check for number of words to display and word location to start displaying at. 1 word displayed at start of memory block if none specified
-			if(CheckInput(ARG1,SPECFLAG,TRUE) && CheckInput(ARG2,NUMBERS,TRUE) && CheckInput(ARG3,NUMBERS,FALSE))
-			{
-				char *word_input=parse(input,delimiters,ARG2);
-				char *word_str=parse(input,delimiters,ARG3);
-				num_words = (uint32_t)atoi(word_str);
-				word_int = (uint32_t)atoi(word_input);
-			}
-			else
-			{
-				num_words = 1;
-			}
-			
-			uint32_t starting_address = (uint32_t)((uintptr_t)(ptr_to_mem+word_int));
-			
-			DisplayCommand(starting_address,num_words);
-			
-		}
 		else
 		{
-			printf("Invalid arguments for display command. Please try again.\n");
+			printf("Invalid arguments for display command. Please try again.\r\n");
 		}
-		*/
 	}
 	else
 	{

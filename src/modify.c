@@ -24,42 +24,82 @@
 
 void ModifyInvoker(void)
 {
+	char arg1[MAX_ARG_LENGTH];
+	char arg2[MAX_ARG_LENGTH];
+	char arg3[MAX_ARG_LENGTH];
 	if(ptr_to_mem != NULL)
 	{
-		// Case 1 - User specifying the address to modify
-		if (CheckInput(ARG1,HEXADECIMAL,TRUE) && CheckInput(ARG2,NUMBERS,FALSE))
+
+		scanf("%s",arg1);
+		printf("\r\n%s ",arg1);
+		char *arg1ptr = arg1;
+
+		//Case 1: Sepcial flag "X" has been raised, use pointer to mem block as starting point for command
+		if(CheckInput(arg1ptr,SPECFLAG,FALSE))
 		{
-			char *addr_input=parse(input,delimiters,ARG1);
-			char *value_str=parse(input,delimiters,ARG2);
-			char **endptr = NULL;
-			uint32_t address_int;
-			uint32_t value;
-	
-			address_int = (uint32_t)strtol(addr_input,endptr,16);
-			value = (uint32_t)atoi(value_str);
-			
-			ModifyCommand(address_int,value);
+			//arg1 = special flag
+			//arg2 = offset from mem pointer
+			scanf("%s",arg2);
+			printf(" %s ",arg2);
+			//arg3 = value to write to memory
+			scanf("%s",arg3);
+			printf("%s\r\n",arg3);
+			char *arg2ptr = arg2;
+			char *arg3ptr = arg3;
+			if(CheckInput(arg2ptr,NUMBERS,TRUE) && CheckInput(arg3ptr,NUMBERS,FALSE))
+			{
+				uint32_t offset;
+				uint32_t value;
+
+				offset = (uint32_t)atoi(arg2);
+				value = (uint32_t)atoi(arg3);
+
+
+				uint32_t starting_address = (uint32_t)((uintptr_t)(ptr_to_mem+offset));
+
+				ModifyCommand(starting_address,value);
+			}
+			else
+			{
+				printf("Invalid arguments for modify command. Please try again.\r\n");
+				return;
+			}
+
 		}
-		// Case 2 - User specifying the word number to modify
-		else if(CheckInput(ARG1,SPECFLAG,TRUE) && CheckInput(ARG2,NUMBERS,TRUE) && CheckInput(ARG3,NUMBERS,FALSE))
+		else if(CheckInput(arg1ptr,HEXADECIMAL,TRUE))
 		{
-			char *word_input=parse(input,delimiters,ARG2);
-			char *value_str=parse(input,delimiters,ARG3);
-			uint32_t word_int = (uint32_t)atoi(word_input);
-			uint32_t value = (uint32_t)atoi(value_str);
+			//Case 2: No special flag raised, input full address value
+			//arg1 = address
+			//arg2 = value to write to memory
+			scanf("%s",arg2);
+			printf(" %s\r\n",arg2);
+			char *arg2ptr = arg2;
+			if(CheckInput(arg2ptr,NUMBERS,FALSE))
+			{
+				char **endptr = NULL;
+				uint32_t address_int;
+				uint32_t value;
 
-			uint32_t address = (uint32_t)((uintptr_t)(ptr_to_mem+word_int));
-			ModifyCommand(address,value);
+				address_int = (uint32_t)strtol(arg1,endptr,16);
+				value = (uint32_t)atoi(arg2);
 
+				ModifyCommand(address_int,value);
+
+			}
+			else
+			{
+				printf("Invalid arguments for modify command. Please try again.\r\n");
+				return;
+			}
 		}
 		else
 		{
-			printf("Invalid arguments to modify command. Nothing will be modified.\n");
+			printf("Invalid arguments for modify command. Please try again.\r\n");
 		}
-	} 
-	else 
+	}
+	else
 	{
-		printf("You have no allocated memory to modify.\n");
+		printf("You have no allocated memory to modify.\r\n");
 	}
 	
 }

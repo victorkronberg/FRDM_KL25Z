@@ -71,6 +71,11 @@ void WriteInvoker (void)
 				uint32_t starting_address = (uint32_t)((uintptr_t)(ptr_to_mem+offset));
 				WriteCommand(starting_address,num_words,seed);
 			}
+			else
+			{
+				printf("Invalid arguments to write command. No patterns will be written.\r\n");
+				return;
+			}
 		}
 
 		//Case 2: specify the exact memory location to begin write command
@@ -97,6 +102,11 @@ void WriteInvoker (void)
 				seed = (uint32_t)atoi(arg3);
 
 				WriteCommand(address_int,num_words,seed);
+			}
+			else
+			{
+				printf("Invalid arguments to write command. No patterns will be written.\r\n");
+				return;
 			}
 		}
 		else

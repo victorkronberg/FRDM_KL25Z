@@ -70,6 +70,11 @@ void VerifyInvoker (void)
 				uint32_t starting_address = (uint32_t)((uintptr_t)(ptr_to_mem+offset));
 				VerifyCommand(starting_address,num_words,seed);
 			}
+			else
+			{
+				printf("Invalid arguments to verify command. Nothing will be verified.\r\n");
+				return;
+			}
 		}
 
 		//Case 2: specify the exact memory location to begin verify command
@@ -97,52 +102,20 @@ void VerifyInvoker (void)
 
 				VerifyCommand(address_int,num_words,seed);
 			}
-
-		/*
-		//Case 1: User specifies starting address, number of words to verify, and a seed value for PRNG
-		if(CheckInput(ARG1,HEXADECIMAL,TRUE) && CheckInput(ARG2,NUMBERS,TRUE) && CheckInput(ARG3,NUMBERS,FALSE))
-		{
-			char *addr_input=parse(input,delimiters,ARG1);
-			char *num_words_str=parse(input,delimiters,ARG2);
-			char *seed_str=parse(input,delimiters,ARG3);
-			char **endptr = NULL;
-			uint32_t address_int;
-			uint32_t num_words;
-			uint32_t seed;
-			
-			address_int = (uint32_t)strtol(addr_input,endptr,16);
-			num_words = (uint32_t)atoi(num_words_str);
-			seed = (uint32_t)atoi(seed_str);
-
-			VerifyCommand(address_int,num_words,seed);
-		}
-		//Case 2: Special flag raised -  starting address is pointer to memory, user specifies offset from address, number of words to verify, and a seed value for PRNG
-		else if(CheckInput(ARG1,SPECFLAG,TRUE) && CheckInput(ARG2,NUMBERS,TRUE) && CheckInput(ARG3,NUMBERS,TRUE) && CheckInput(ARG4,NUMBERS,FALSE))
-		{
-			char *offset_str=parse(input,delimiters,ARG2);
-			char *num_words_str=parse(input,delimiters,ARG3);
-			char *seed_str=parse(input,delimiters,ARG4);
-			uint32_t offset;
-			uint32_t num_words;
-			uint32_t seed;
-			
-			offset = (uint32_t)atoi(offset_str);
-			num_words = (uint32_t)atoi(num_words_str);
-			seed = (uint32_t)atoi(seed_str);
-			
-			uint32_t starting_address = (uint32_t)((uintptr_t)(ptr_to_mem+offset));
-			VerifyCommand(starting_address,num_words,seed);
-		}
-		*/
+			else
+			{
+				printf("Invalid arguments to verify command. Nothing will be verified.\r\n");
+				return;
+			}
 		}
 		else
 		{
-			printf("Invalid arguments to verify command. Nothing will be verified.\n");
+			printf("Invalid arguments to verify command. Nothing will be verified.\r\n");
 		}
 	}
 	else 
 	{
-		printf("You have no allocated memory to verify.\n");
+		printf("You have no allocated memory to verify.\r\n");
 	}
 }
 
